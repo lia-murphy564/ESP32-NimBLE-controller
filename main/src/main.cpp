@@ -23,30 +23,32 @@
 // #include "esp_console.h"
 // #include "linenoise/linenoise.h"
 
-Parameter* p;
+
 
 extern "C" void app_main(void) {
+
+   vTaskDelay(1000 / portTICK_RATE_MS);
     
+   Parameter* p = new Parameter();
+
    ble_init();
 
-      parameter_config param_conf = {
+   parameter_config param_conf = {
       .val = 0x00,
       .type = pot,
       .idx = pot1
    };
 
-
    p->configure(&param_conf);
 
-   int data;
-   printf("Hello world!\n");
+   unsigned int data;
 
    while(true) {
 
       p->setValue(5);
-
       data = p->getValue();
       printf("%u", data);
+      vTaskDelay(200 / portTICK_RATE_MS);
 
       // int test = 696969;
       // uart_write_bytes(uart_num, (char*)test, sizeof(test));

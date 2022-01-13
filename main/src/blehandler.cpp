@@ -11,20 +11,15 @@ void ble_init() {
     NimBLEDevice::init("device name esp lol");
 
     NimBLEServer *pServer = NimBLEDevice::createServer();
-    NimBLEService *pService = pServer->createService((char*)SERVICE_ID);
+    NimBLEService *pService = pServer->createService("1234");
 
-    NimBLECharacteristic *pCharacteristic = pService->createCharacteristic(
-        (char*)DATA_CHARACTERISTIC_ID, 
-        NIMBLE_PROPERTY::READ | 
-        NIMBLE_PROPERTY::WRITE | 
-        NIMBLE_PROPERTY::NOTIFY
-        );
+    NimBLECharacteristic *pCharacteristic = pService->createCharacteristic("ABCF");
 
     NimBLEAdvertising *pAdvertising = NimBLEDevice::getAdvertising();
 
     pService->start();
     pCharacteristic->setValue("hello");
-    pAdvertising->addServiceUUID((char*)SERVICE_ID);
+    pAdvertising->addServiceUUID("1234");
     pAdvertising->start();
 }
 

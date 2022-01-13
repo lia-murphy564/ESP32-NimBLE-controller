@@ -26,9 +26,9 @@ enum param_index {
 };
 
 struct parameter_bit_field {
-    unsigned int val: 12;
-    unsigned int idx: 3;
-    unsigned int type: 1;
+    unsigned int val: 12; // 0 to 4096
+    unsigned int idx: 3; // 0 to 7
+    unsigned int type: 1; // 0 to 1
     // bit[11] val;
     // bit[2] idx;
     // bit type;
@@ -45,22 +45,21 @@ private:
     parameter_bit_field param;
     parameter_config config;
 public:
-    Parameter();
-    //~ParameterSS();
+    Parameter() {}
+    ~Parameter() {}
 
     void configure(parameter_config* conf) {
         //&config = conf;
         param.val = conf->val;
         param.type = conf->type;
         param.idx = conf->idx;
-
     }
 
-    void setValue(int v) {
+    void setValue(unsigned int v) {
         param.val = v;
     }
 
-    int getValue() {
+    unsigned int getValue() {
         return param.val;
     }
 };
