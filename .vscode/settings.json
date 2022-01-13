@@ -1,8 +1,23 @@
 {
   "C_Cpp.intelliSenseEngine": "Tag Parser",
+  //"C_Cpp.intelliSenseEngine": "Default",
   "idf.adapterTargetName": "esp32",
   "idf.openOcdConfigs": [
     "interface/ftdi/esp32_devkitj_v1.cfg",
     "target/esp32.cfg"
-  ]
+  ],
+  "psi-header.templates": [
+    {
+        "language": "*",
+        "template": [
+            "File: <<filename>>",
+            "File Created: <<filecreated('dddd, Do MMMM YYYY h:mm a')>>",
+            "Author: Lia Murphy (wxm219@miami.edu)",
+        ]
+    }
+  ],
+  "files.associations": {
+    "task.h": "c",
+    "random": "cpp"
+  }
 }

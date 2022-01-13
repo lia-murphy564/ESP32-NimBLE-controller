@@ -5,12 +5,14 @@
             "compilerPath": "C:\\Users\\Amelia\\.espressif\\tools\\xtensa-esp32-elf\\esp-2021r1-8.4.0\\xtensa-esp32-elf\\bin\\xtensa-esp32-elf-gcc.exe",
             "cStandard": "c11",
             "cppStandard": "c++17",
+            //"intelliSenseMode": "${default}",
             "includePath": [
                 "${config:idf.espIdfPath}/components/**",
                 "${config:idf.espIdfPathWin}/components/**",
                 "${config:idf.espAdfPath}/components/**",
                 "${config:idf.espAdfPathWin}/components/**",
-                "${workspaceFolder}/**"
+                "${workspaceFolder}/**",
+                "C:\\Users\\Amelia\\Desktop\\Capstone\\nimble-test\\main\\inc\\**"
             ],
             "browse": {
                 "path": [
@@ -18,7 +20,8 @@
                     "${config:idf.espIdfPathWin}/components",
                     "${config:idf.espAdfPath}/components/**",
                     "${config:idf.espAdfPathWin}/components/**",
-                    "${workspaceFolder}"
+                    "${workspaceFolder}",
+                    "C:\\Users\\Amelia\\Desktop\\Capstone\\nimble-test\\main\\inc\\**"
                 ],
                 "limitSymbolsToIncludedHeaders": false
             }

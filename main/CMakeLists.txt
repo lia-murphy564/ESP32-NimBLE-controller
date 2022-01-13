@@ -1,4 +1,4 @@
 idf_component_register(
-    SRCS "main.cpp"
-    INCLUDE_DIRS ""
+    SRCS "src/main.cpp" "src/blehandler.cpp" "src/parameter.cpp"
+    INCLUDE_DIRS "inc"
 )
