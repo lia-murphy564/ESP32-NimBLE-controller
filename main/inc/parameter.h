@@ -7,6 +7,8 @@
 #ifndef __PARAMETER_H__
 #define __PARAMETER_H__
 
+#pragma once
+
 enum param_type {
     pot = 0x00,
     sw = 0x01 
@@ -44,10 +46,24 @@ private:
     parameter_config config;
 public:
     Parameter();
-    ~Parameter();
-    void configure(parameter_config* conf);
-    void setValue(int v);
-    int getValue();
+    //~ParameterSS();
+
+    void configure(parameter_config* conf) {
+        //&config = conf;
+        param.val = conf->val;
+        param.type = conf->type;
+        param.idx = conf->idx;
+
+    }
+
+    void setValue(int v) {
+        param.val = v;
+    }
+
+    int getValue() {
+        return param.val;
+    }
 };
+
 
 #endif // __PARAMETER_H__

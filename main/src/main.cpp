@@ -12,6 +12,7 @@
 
 #include "blehandler.h"
 #include "parameter.h"
+#include <vector>
 
 // #include "driver/uart.h"
 // #include "soc/uart_periph.h"
@@ -22,21 +23,31 @@
 // #include "esp_console.h"
 // #include "linenoise/linenoise.h"
 
+Parameter* p;
+
 extern "C" void app_main(void) {
     
    ble_init();
 
-   parameter_config param_conf = {
+      parameter_config param_conf = {
       .val = 0x00,
       .type = pot,
       .idx = pot1
    };
 
-   Parameter p;
-   //p.configure(&param_conf);
+
+   p->configure(&param_conf);
+
+   int data;
+   printf("Hello world!\n");
 
    while(true) {
-      printf("Hello world!\n");
+
+      p->setValue(5);
+
+      data = p->getValue();
+      printf("%u", data);
+
       // int test = 696969;
       // uart_write_bytes(uart_num, (char*)test, sizeof(test));
    }

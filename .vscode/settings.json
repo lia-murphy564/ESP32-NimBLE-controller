@@ -18,6 +18,11 @@
   ],
   "files.associations": {
     "task.h": "c",
-    "random": "cpp"
-  }
+    "random": "cpp",
+    "*.ipp": "cpp",
+    "array": "cpp",
+    "string": "cpp",
+    "string_view": "cpp"
+  },
+  "idf.portWin": "COM3"
 }
