@@ -23,6 +23,16 @@
 // #include "esp_console.h"
 // #include "linenoise/linenoise.h"
 
+#define BYTE_TO_BINARY_PATTERN "%c%c%c%c%c%c%c%c"
+#define BYTE_TO_BINARY(byte)  \
+  (byte & 0x80 ? '1' : '0'), \
+  (byte & 0x40 ? '1' : '0'), \
+  (byte & 0x20 ? '1' : '0'), \
+  (byte & 0x10 ? '1' : '0'), \
+  (byte & 0x08 ? '1' : '0'), \
+  (byte & 0x04 ? '1' : '0'), \
+  (byte & 0x02 ? '1' : '0'), \
+  (byte & 0x01 ? '1' : '0') 
 
 
 extern "C" void app_main(void) {
@@ -36,20 +46,24 @@ extern "C" void app_main(void) {
    parameter_config param_conf = {
       .val = 0x00,
       .type = pot,
-      .idx = pot1
+      .idx = pot3
    };
 
    p->configure(&param_conf);
 
+   unsigned int value;
    unsigned int data;
+
 
    while(true) {
 
-      p->setValue(5);
-      data = p->getValue();
-      printf("%u", data);
-      vTaskDelay(200 / portTICK_RATE_MS);
-
+      for (int i = 0; i < 256; i++) {
+         p->setValue(i);
+         value = p->getValue();
+         data = p->getBitField();
+         printf("%u -- " BYTE_TO_BINARY_PATTERN "\n", value, BYTE_TO_BINARY(data));
+         vTaskDelay(100 / portTICK_RATE_MS);
+      }
       // int test = 696969;
       // uart_write_bytes(uart_num, (char*)test, sizeof(test));
    }

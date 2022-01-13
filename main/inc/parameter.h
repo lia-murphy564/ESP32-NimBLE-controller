@@ -62,6 +62,11 @@ public:
     unsigned int getValue() {
         return param.val;
     }
+
+    unsigned int getBitField() {
+        unsigned int ret = param.type << 15 | param.idx << 12 | param.val;
+        return ret;
+    }
 };
 
 
