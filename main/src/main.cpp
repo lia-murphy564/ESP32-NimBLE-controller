@@ -10,9 +10,12 @@
 #include "esp_system.h"
 #include "esp_spi_flash.h"
 
+#include <vector>
+#include <bitset>
+
 #include "blehandler.h"
 #include "parameter.h"
-#include <vector>
+
 
 // #include "driver/uart.h"
 // #include "soc/uart_periph.h"
@@ -32,7 +35,9 @@
   (byte & 0x08 ? '1' : '0'), \
   (byte & 0x04 ? '1' : '0'), \
   (byte & 0x02 ? '1' : '0'), \
-  (byte & 0x01 ? '1' : '0') 
+  (byte & 0x01 ? '1' : '0')
+
+
 
 
 extern "C" void app_main(void) {
@@ -44,7 +49,6 @@ extern "C" void app_main(void) {
    ble_init();
 
    parameter_config param_conf = {
-      .val = 0x00,
       .type = pot,
       .idx = pot3
    };
@@ -61,7 +65,8 @@ extern "C" void app_main(void) {
          p->setValue(i);
          value = p->getValue();
          data = p->getBitField();
-         printf("%u -- " BYTE_TO_BINARY_PATTERN "\n", value, BYTE_TO_BINARY(data));
+         const char* datab = std::bitset<32>(data).to_string().c_str(); //to binary
+         printf("%u -- %s\n", value, datab);
          vTaskDelay(100 / portTICK_RATE_MS);
       }
       // int test = 696969;

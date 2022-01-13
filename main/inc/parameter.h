@@ -7,8 +7,6 @@
 #ifndef __PARAMETER_H__
 #define __PARAMETER_H__
 
-#pragma once
-
 enum param_type {
     pot = 0x00,
     sw = 0x01 
@@ -29,44 +27,36 @@ struct parameter_bit_field {
     unsigned int val: 12; // 0 to 4096
     unsigned int idx: 3; // 0 to 7
     unsigned int type: 1; // 0 to 1
-    // bit[11] val;
-    // bit[2] idx;
-    // bit type;
+    unsigned int nil: 13;
 };
 
 struct parameter_config {
-    unsigned int val;
     param_type type;
     param_index idx;
 };
 
 class Parameter {
 private:
-    parameter_bit_field param;
-    parameter_config config;
+    parameter_bit_field* param;
+    parameter_config* config;
 public:
-    Parameter() {}
-    ~Parameter() {}
+    Parameter();
+    ~Parameter();
 
-    void configure(parameter_config* conf) {
-        //&config = conf;
-        param.val = conf->val;
-        param.type = conf->type;
-        param.idx = conf->idx;
-    }
+    void configure(parameter_config* conf);
 
-    void setValue(unsigned int v) {
-        param.val = v;
-    }
+    parameter_config getConfig();
 
-    unsigned int getValue() {
-        return param.val;
-    }
+    void setValue(unsigned int v);
+    unsigned int getValue();
 
-    unsigned int getBitField() {
-        unsigned int ret = param.type << 15 | param.idx << 12 | param.val;
-        return ret;
-    }
+    void setType(param_type type);
+    param_type getType();
+
+    void setIndex(param_index idx);
+    param_index getIndex();
+
+    unsigned int getBitField();
 };
 
 
